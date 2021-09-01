@@ -1,0 +1,37 @@
+Roll Number.: 	M21CS064
+
+Following are the steps followed to create an image of a web application on docker:
+1. On a virtual machine with CentOS 8, older versions of docker were removed (if any) and their dependencies using:
+sudo yum remove docker docker-latest docker-engine docker-client docker-common docker-client-latest
+
+2. Add docker’s repository to the system’s sources list:
+sudo yum config-manager –add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
+3. Install Docker engine using the command mentioned below:
+sudo yum install docker-ce –nobest –allowerasing -y
+
+--nobest : to erase the installed packages for resolving dependencies.
+
+4. Start the Docker daemon using:
+sudo systemctl start docker
+
+5. Check the status of the docker:
+sudo systemctl status docker
+
+6. Instead of starting the docker everytime, we can enable it on the system boot to start at the boot time:
+sudo systemctl enable docker
+
+7. Created an HTML file to display the content on the web page named ‘index.html’
+
+8. Under the same directory where the index.html has been created, Dockerfile mentioning the commands to be run on deploying the image was also created.
+
+Dockerfile mentions the commands to pull the image of nginx and copy the index.html from the current directory to /usr/share/nginx/html/ from where nginx tries to access the file.
+
+9. To build and tag the image:
+Docker build -t first-app/v6 .
+
+10. To run the image built in the previous step, following command was used:
+Docker run -it –rm -d -p 8080:80 –name first-app-v6 first-app/v6
+
+11. Docker image was compressed to tar file using:
+Docker save -o first-app-v6.tar first-app/v6
