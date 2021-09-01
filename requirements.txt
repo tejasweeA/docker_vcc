@@ -4,11 +4,11 @@ Following are the steps followed to create an image of a web application on dock
 1. On a virtual machine with CentOS 8, older versions of docker were removed (if any) and their dependencies using:
 sudo yum remove docker docker-latest docker-engine docker-client docker-common docker-client-latest
 
-2. Add docker’s repository to the system’s sources list:
-sudo yum config-manager –add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+2. Add dockerâ€™s repository to the systemâ€™s sources list:
+sudo yum config-manager â€“add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 
 3. Install Docker engine using the command mentioned below:
-sudo yum install docker-ce –nobest –allowerasing -y
+sudo yum install docker-ce â€“nobest â€“allowerasing -y
 
 --nobest : to erase the installed packages for resolving dependencies.
 
@@ -21,7 +21,7 @@ sudo systemctl status docker
 6. Instead of starting the docker everytime, we can enable it on the system boot to start at the boot time:
 sudo systemctl enable docker
 
-7. Created an HTML file to display the content on the web page named ‘index.html’
+7. Created an HTML file to display the content on the web page named â€˜index.htmlâ€™
 
 8. Under the same directory where the index.html has been created, Dockerfile mentioning the commands to be run on deploying the image was also created.
 
@@ -30,8 +30,17 @@ Dockerfile mentions the commands to pull the image of nginx and copy the index.h
 9. To build and tag the image:
 Docker build -t first-app/v6 .
 
+(-t : to tag the image)
+
 10. To run the image built in the previous step, following command was used:
-Docker run -it –rm -d -p 8080:80 –name first-app-v6 first-app/v6
+Docker run -it â€“rm -d -p 8080:80 â€“name first-app-v6 first-app/v6
+
+( -it : to run the application in interactive mode
+--rm : to clean up the container when it exits
+first-app-v6 : name the container
+-d : to run in detached mode i.e in the background
+- p : to publish the ports i.e. redirect to port 80 of container if there is a request on 8080 port of the host server
+first-app/v6 : docker image)
 
 11. Docker image was compressed to tar file using:
 Docker save -o first-app-v6.tar first-app/v6
